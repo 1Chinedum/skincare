@@ -1,0 +1,8 @@
+const CART_KEY = 'skincare-cart';
+const getCart = () => JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+const saveCart = cart => { localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateCartCount(); };
+function updateCartCount() { const count = getCart().reduce((total, item) => total + item.quantity, 0); document.querySelectorAll('.cart-count').forEach(el => el.textContent = count); }
+function addToCart(id, quantity = 1) { const product = getProduct(id); if (!product || product.availability !== 'In Stock') return; const cart = getCart(); const item = cart.find(entry => entry.id === id); if (item) item.quantity += quantity; else cart.push({ id, quantity }); saveCart(cart); }
+function renderProductCard(product) { return `<article class="product-card reveal"><a class="product-image" href="product.html?id=${product.id}"><img src="${product.image}" alt="${product.name}" loading="lazy"></a><div class="product-info"><h3>${product.name}</h3><p class="product-desc">${product.description}</p><div class="product-actions"><span class="price">${money(product.price)}</span><a class="text-link" href="product.html?id=${product.id}">View product</a><button class="button small" onclick="addToCart('${product.id}')" ${product.availability !== 'In Stock' ? 'disabled' : ''}>${product.availability === 'In Stock' ? 'Add to cart' : 'Out of stock'}</button></div></div></article>`; }
+function initNav() { document.querySelector('.menu-toggle')?.addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('open')); updateCartCount(); }
+document.addEventListener('DOMContentLoaded', initNav);
