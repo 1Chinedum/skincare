@@ -4,7 +4,7 @@ from pathlib import Path
 from pypdf import PdfReader
 
 root = Path('.')
-out = root / 'images' / 'catalogue'
+out = root
 out.mkdir(parents=True, exist_ok=True)
 reader = PdfReader('Catalogue Q3 - UPDATED.pdf')
 seen = {}
@@ -46,7 +46,7 @@ for product in products:
     product_pages = [index + 1 for index, text in enumerate(page_texts) if product['id'] in text]
     asset = next((page_assets[page][0] for page in product_pages if page_assets.get(page)), None)
     if asset:
-        product['image'] = f'images/catalogue/{asset}'
+        product['image'] = asset
 
 products_path.write_text(
     '// Imported from Catalogue Q3 - UPDATED.pdf. Local images extracted from the catalogue.\n'
