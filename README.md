@@ -8,7 +8,7 @@ Open `index.html` directly in a browser, or serve the folder with any static web
 
 ## Add products
 
-Edit the `products` array in `js/products.js`. Each product has an ID, name, price, image, category, description, benefits, usage, ingredients, availability, and featured flag. Product images extracted from the catalogue are stored in `images/catalogue/`.
+Edit the `products` array in `js/products.js`. Each product has an ID, name, price, image, category, description, benefits, usage, ingredients, availability, and featured flag. Product images extracted from the catalogue are stored directly in the project root alongside the website files.
 
 To repeat the image import after receiving a new PDF, place it beside `extract_images.py` with the expected catalogue filename and run `python extract_images.py`.
 
